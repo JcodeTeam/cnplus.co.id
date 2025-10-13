@@ -3,7 +3,7 @@ session_start();
 require_once '../api/db.php';
 
 if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
-    header('Location: index.html');
+    header('Location: ./');
     exit;
 }
 
@@ -52,6 +52,7 @@ if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
           <img src="" alt="" />
           <h4 class="name"><?= $_SESSION['admin_username']; ?></h4>
         </a>
+        <a href="../api/logout.php" class="btn btn-danger">Logout</a>
       </nav>
     </header>
 
