@@ -20,8 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($admin && password_verify($password, $admin['password'])) {
             $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_id'] = $admin['id'];     
+            $_SESSION['admin_username'] = $admin['username'];
             ob_clean();
-            echo json_encode(['status' => 'success', 'redirect' => 'dashboard.html']);
+            echo json_encode(['status' => 'success', 'redirect' => 'dashboard.php']);
         } else {
             ob_clean();
             echo json_encode(['status' => 'error', 'message' => 'Username atau password salah']);
