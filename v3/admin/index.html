@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../asset/logo-2.png" type="image/x-icon" />
+    <title>Login Page - CNPLUS</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="../assets/login-B3Z3qZSG.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/utils-0K0NRc03.js">
+    <link rel="stylesheet" crossorigin href="../assets/utils-G2Uxg8FP.css">
+    <link rel="stylesheet" crossorigin href="../assets/form-BTXpGTEZ.css">
+    <link rel="stylesheet" crossorigin href="../assets/login-CfA1H-tA.css">
+  </head>
+  <body>
+    <div id="form__container" class="form fade-section">
+      <h2 class="form__title">Login Admin</h2>
+      <!-- <div class="wrapper"> -->
+        <form id="login-form" class="form__group">
+          <div class="form__field">
+            <label for="username">Username</label>
+            <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter Username"
+            required
+            />
+          </div>
+          <div class="form__field pass-field">
+            <label for="password">Password</label>
+            <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+            />
+            <a class="add forgot" href="./forgot-password.html">Forgot password?</a>
+          </div>
+          <button class="btn btn-form" type="submit">Login</button>
+          <span class="add">Don't have an account? <a href="./register.html">Register Now</a></span>
+        </form>
+        <div id="error-message"></div>
+      </div>
+    </div>
+  </body>
+</html>

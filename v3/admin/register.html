@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Admin - CNPLUS</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter&display=swap "
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="../assets/register-Chs2Jg1U.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/utils-0K0NRc03.js">
+    <link rel="stylesheet" crossorigin href="../assets/utils-G2Uxg8FP.css">
+    <link rel="stylesheet" crossorigin href="../assets/form-BTXpGTEZ.css">
+    <link rel="stylesheet" crossorigin href="../assets/login-CfA1H-tA.css">
+  </head>
+  <body>
+    <div id="form__container" class="form fade-section">
+      <h2 class="form__title">Register Admin</h2>
+      <form id="register-form" class="form__group">
+        <div class="form__field">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter Full Name"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter Username"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label for="password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm_password"
+            placeholder="Re-type Password"
+            required
+          />
+        </div>
+        <button class="btn btn-form" type="submit">Register</button>
+        <span class="add"
+          >Already have an account? <a href="./index.html">Login Now</a></span
+        >
+      </form>
+      <div id="error-message"></div>
+    </div>
+
+  </body>
+</html>

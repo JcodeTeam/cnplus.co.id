@@ -1,0 +1,1 @@
+import{f as e,h as r}from"./utils-0K0NRc03.js";/* empty css             *//* empty css              */document.addEventListener("DOMContentLoaded",()=>{e(),r("forgot-form","../api/forgot-password.php","error-message",o=>{window.location.href=`reset-password.html?user=${encodeURIComponent(o.username)}`})});

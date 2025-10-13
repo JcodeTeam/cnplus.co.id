@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - CNPLUS</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- CDN jsDelivr
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons @2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    /> -->
+    <script type="module" crossorigin src="../assets/dashboard-CRPYBi8V.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/utils-0K0NRc03.js">
+    <link rel="stylesheet" crossorigin href="../assets/utils-G2Uxg8FP.css">
+    <link rel="stylesheet" crossorigin href="../assets/dashboard-Bsd0-XCv.css">
+  </head>
+  <body class="inter-font dark-mode">
+    <header>
+      <nav>
+        <i class="bx bx-menu" data-toggle="aside"></i>
+        <a href="#" class="nav-link">Categories</a>
+        <form action="#" class="form-search">
+          <input type="search" placeholder="Search..." />
+          <button type="submit" class="search-btn">
+            <i class="bx bx-search"></i>
+          </button>
+        </form>
+        <a href="#" class="notification">
+          <i class="bx bxs-bell"></i>
+          <span class="num">8</span>
+        </a>
+        <a href="#">
+          <img src="" alt="" />
+          <h4 class="name">Catherine Esther</h4>
+        </a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="wrapper">
+      <aside>
+        <div class="brand">
+          <i class="bx bxs-dashboard"></i>
+          <h2>Dashboard</h2>
+        </div>
+        <ul class="lists">
+          <li class="list active" data-toggle="siblings">
+            <a href="#">
+              <!-- <i class="bx bxs-dashboard"></i> -->
+              <i class="bx bxs-chalkboard"></i>
+              <span>Pengajuan Demo</span>
+            </a>
+          </li>
+          <li class="list" data-toggle="siblings">
+            <a href="#">
+              <i class="bx bxs-cog"></i>
+              <span>Pengaturan</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <div class="content">
+          <table id="data-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>Email</th>
+                <th>Perusahaan</th>
+                <th>Industri</th>
+                <th>Nomor Telepon</th>
+                <th>Produk</th>
+                <th>Deskripsi</th>
+                <th>Tanggal Pengajuan</th>
+              </tr>
+            </thead>
+            <!-- <tbody>
+              <tr>
+                <td>1</td>
+                <td>rolano</td>
+                <td>rolano@gmail.com</td>
+                <td>rolanoCompany</td>
+                <td>Healthcare</td>
+                <td>087752657780</td>
+                <td>E-Hospital (Medical Record &amp; HIS)</td>
+                <td>Need the software</td>
+                <td>5/19/2025, 11:43:51 AM</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>romeo</td>
+                <td>romeo.email@gmail.com</td>
+                <td>romeoCompany</td>
+                <td>Technology</td>
+                <td>08338764799</td>
+                <td>IT Service Management (ITop)</td>
+                <td>Want to use the software</td>
+                <td>5/19/2025, 11:15:56 AM</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Yoona</td>
+                <td>yoona.snsd@gmail.com</td>
+                <td>SM</td>
+                <td>Education</td>
+                <td>082137754012</td>
+                <td>Learning Management System</td>
+                <td>Pendidikan yang baik</td>
+                <td>5/19/2025, 11:12:19 AM</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Lorena</td>
+                <td>lorena.cnplus@gmail.com</td>
+                <td>Mocarin</td>
+                <td>healthcare</td>
+                <td>087725019976</td>
+                <td>E-Hospital (Medical Record &amp; HIS)</td>
+                <td>Kesehatan yang terpenting</td>
+                <td>5/16/2025, 3:57:55 PM</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Catherine</td>
+                <td>catherine.cnplus@gmail.com</td>
+                <td>Corparable</td>
+                <td>finance</td>
+                <td>0829289852</td>
+                <td>Micro Banking System</td>
+                <td>Deskripsi singkat</td>
+                <td>5/16/2025, 3:08:54 PM</td>
+              </tr>
+            </tbody> -->
+            <tbody>
+              <tr>
+                <td colspan="9" id="loading">Memuat data...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+    <!-- Main -->
+  </body>
+</html>

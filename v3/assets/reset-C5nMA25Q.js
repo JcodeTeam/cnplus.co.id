@@ -1,0 +1,1 @@
+import{f as o,h as a}from"./utils-0K0NRc03.js";/* empty css             *//* empty css              */document.addEventListener("DOMContentLoaded",()=>{o();const e=new URLSearchParams(window.location.search).get("user");a("reset-form",`../api/reset-password.php?user=${encodeURIComponent(e)}`,"error-message",r=>{window.location.href=r.redirect})});

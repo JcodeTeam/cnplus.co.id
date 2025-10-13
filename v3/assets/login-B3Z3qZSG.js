@@ -1,0 +1,1 @@
+import{f as e,h as r}from"./utils-0K0NRc03.js";/* empty css             *//* empty css              */document.addEventListener("DOMContentLoaded",()=>{e(),r("login-form","../api/login.php","error-message",o=>{window.location.href=o.redirect})});
