@@ -2,8 +2,8 @@
 // db.php - File koneksi, auto-create database & tabel
 
 $host = "localhost";
-$dbusername = "cnplusco_admin";
-$dbpassword = "cn+db.admin";
+$dbusername = "root";
+$dbpassword = "";
 $dbname = "cnplusco_admin"; // Database utama
 
 try {
