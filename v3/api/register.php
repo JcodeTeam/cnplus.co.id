@@ -5,10 +5,11 @@ require_once './db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name'] ?? '');
     $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
-    if (empty($name) || empty($username) || empty($password) || empty($confirmPassword)) {
+    if (empty($name) || empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
         ob_clean();
         echo json_encode(['status' => 'error', 'message' => 'Semua kolom harus diisi']);
         exit;
@@ -33,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Simpan admin baru
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("INSERT INTO admin (name, username, password) VALUES (?, ?, ?)");
-        $stmt->execute([$name, $username, $hashedPassword]);
+        $stmt = $pdo->prepare("INSERT INTO admin (name, username, email, password) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$name, $username, $email, $hashedPassword]);
 
         ob_clean();
         echo json_encode(['status' => 'success', 'redirect' => 'index.html']);
