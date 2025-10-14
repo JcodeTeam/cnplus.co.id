@@ -73,6 +73,27 @@ try {
 
     $mailSent = mail($to, $subject, $message, implode("\r\n", $headers));
 
+    $adminQuery = $pdo->query("SELECT name, email FROM admin WHERE notify_demo = 1 AND email IS NOT NULL");
+    $admins = $adminQuery->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($admins as $admin) {
+        $adminBody = "
+        <html><body>
+            <h3>Permintaan Demo Baru:</h3>
+            <ul>
+                <li><b>Nama:</b> {$fullname}</li>
+                <li><b>Email:</b> {$email}</li>
+                <li><b>Perusahaan:</b> {$company}</li>
+                <li><b>Industri:</b> {$industry}</li>
+                <li><b>Telepon:</b> {$phone}</li>
+                <li><b>Produk:</b> {$product}</li>
+                <li><b>Deskripsi:</b> {$description}</li>
+            </ul>
+        </body></html>";
+
+        mail($admin['email'], "Request Demo Baru dari {$fullname}", $adminBody, implode("\r\n", $headers));
+    }
+
     if ($mailSent) {
         echo json_encode([
             "status" => "success",
@@ -90,4 +111,3 @@ try {
     http_response_code(500);
     echo json_encode(["status" => "error", "message" => "Terjadi kesalahan server"]);
 }
-?>
