@@ -6,6 +6,8 @@ require_once '../api/db.php';
 if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
   header('Location: ./');
   exit;
+  header('Location: ./');
+  exit;
 }
 ?>
 
