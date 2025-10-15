@@ -50,13 +50,13 @@ if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
     class="fixed left-0 top-16 bottom-0 z-40 bg-white border-r border-zinc-200 w-64 lg:translate-x-0 -translate-x-full transition-all duration-300 ease-in-out flex flex-col overflow-hidden">
     <ul class="p-2 space-y-1 flex-grow">
       <li>
-        <a class="aside-link flex items-center gap-3 px-3 h-10 rounded-xl hover:bg-zinc-100 text-[#028f46] bg-[#028f46]/10 font-medium">
+        <a class="aside-link flex items-center gap-3 px-3 h-10 rounded-xl hover:bg-zinc-100 text-[#028f46] bg-[#028f46]/10 font-medium" href="./dashboard.php">
           <i class="bx bxs-chalkboard text-xl"></i>
           <span class="aside-label">Pengajuan Demo</span>
         </a>
       </li>
       <li>
-        <a class="aside-link flex items-center gap-3 px-3 h-10 rounded-xl hover:bg-zinc-100 text-zinc-800">
+        <a class="aside-link flex items-center gap-3 px-3 h-10 rounded-xl hover:bg-zinc-100 text-zinc-800" href="./settings.php">
           <i class="bx bxs-cog text-xl"></i>
           <span class="aside-label">Pengaturan</span>
         </a>
