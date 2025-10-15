@@ -1,169 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php
 session_start();
 require_once '../api/db.php';
-
 if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
-    header('Location: ./');
-    exit;
+  header('Location: ./');
+  exit;
 }
-
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Admin - CNPLUS</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <!-- CDN jsDelivr
-    <link
-      href="https://cdn.jsdelivr.net/npm/boxicons @2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    /> -->
-    <script type="module" crossorigin src="../assets/dashboard-CRPYBi8V.js"></script>
-    <link rel="modulepreload" crossorigin href="../assets/utils-0K0NRc03.js">
-    <link rel="stylesheet" crossorigin href="../assets/utils-G2Uxg8FP.css">
-    <link rel="stylesheet" crossorigin href="../assets/dashboard-Bsd0-XCv.css">
-  </head>
-  <body class="inter-font dark-mode">
-    <header>
-      <nav>
-        <i class="bx bx-menu" data-toggle="aside"></i>
-        <a href="#" class="nav-link">Categories</a>
-        <form action="#" class="form-search">
-          <input type="search" placeholder="Search..." />
-          <button type="submit" class="search-btn">
-            <i class="bx bx-search"></i>
-          </button>
-        </form>
-        <a href="#" class="notification">
-          <i class="bx bxs-bell"></i>
-          <span class="num">8</span>
-        </a>
-        <a href="#">
-          <img src="" alt="" />
-          <h4 class="name"><?= $_SESSION['admin_username']; ?></h4>
-        </a>
-        <a href="../api/logout.php" class="btn btn-danger">Logout</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin - CNPLUS</title>
+  <link rel="icon" href="../asset/logo-2.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    <!-- Main Content -->
-    <div class="wrapper">
-      <aside>
-        <div class="brand">
-          <i class="bx bxs-dashboard"></i>
-          <h2>Dashboard</h2>
+<body class="bg-zinc-50 text-zinc-900" id="app">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-zinc-200">
+    <nav class="mx-auto max-w-7xl px-4 lg:px-6 h-16 flex items-center gap-3">
+      <button id="btnAside" class="p-2 rounded-lg hover:bg-zinc-100 lg:hidden">
+        <i class="bx bx-menu text-2xl"></i>
+      </button>
+      <div class="flex items-center gap-2 shrink-0">
+        <img src="../asset/logo-2.png" class="w-10">
+        <span class="text-3xl font-bold text-[#028f46]">Admin Panel</span>
+      </div>
+      <div class="ml-auto flex items-center gap-2">
+        <div class="hidden sm:flex items-center gap-2">
+          <i class="bx bx-user-circle text-2xl mt-1"></i>
+          <span class="text-sm font-medium truncate max-w-[12rem]"><?php echo $_SESSION['admin_username']; ?></span>
         </div>
-        <ul class="lists">
-          <li class="list active" data-toggle="siblings">
-            <a href="#">
-              <!-- <i class="bx bxs-dashboard"></i> -->
-              <i class="bx bxs-chalkboard"></i>
-              <span>Pengajuan Demo</span>
-            </a>
-          </li>
-          <li class="list" data-toggle="siblings">
-            <a href="#">
-              <i class="bx bxs-cog"></i>
-              <span>Pengaturan</span>
-            </a>
-          </li>
-        </ul>
-      </aside>
+        <a href="../api/logout.php" class="flex items-center gap-2 h-9 border border-zinc-200 px-3 rounded-lg text-sm hover:bg-zinc-50">
+          <i class="bx bx-log-out text-lg"></i>
+          <span class="hidden sm:inline">Logout</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-      <!-- Main -->
-      <main class="main">
-        <div class="content">
-          <table id="data-table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Lengkap</th>
-                <th>Email</th>
-                <th>Perusahaan</th>
-                <th>Industri</th>
-                <th>Nomor Telepon</th>
-                <th>Produk</th>
-                <th>Deskripsi</th>
-                <th>Tanggal Pengajuan</th>
-              </tr>
-            </thead>
-            <!-- <tbody>
-              <tr>
-                <td>1</td>
-                <td>rolano</td>
-                <td>rolano@gmail.com</td>
-                <td>rolanoCompany</td>
-                <td>Healthcare</td>
-                <td>087752657780</td>
-                <td>E-Hospital (Medical Record &amp; HIS)</td>
-                <td>Need the software</td>
-                <td>5/19/2025, 11:43:51 AM</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>romeo</td>
-                <td>romeo.email@gmail.com</td>
-                <td>romeoCompany</td>
-                <td>Technology</td>
-                <td>08338764799</td>
-                <td>IT Service Management (ITop)</td>
-                <td>Want to use the software</td>
-                <td>5/19/2025, 11:15:56 AM</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Yoona</td>
-                <td>yoona.snsd@gmail.com</td>
-                <td>SM</td>
-                <td>Education</td>
-                <td>082137754012</td>
-                <td>Learning Management System</td>
-                <td>Pendidikan yang baik</td>
-                <td>5/19/2025, 11:12:19 AM</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Lorena</td>
-                <td>lorena.cnplus@gmail.com</td>
-                <td>Mocarin</td>
-                <td>healthcare</td>
-                <td>087725019976</td>
-                <td>E-Hospital (Medical Record &amp; HIS)</td>
-                <td>Kesehatan yang terpenting</td>
-                <td>5/16/2025, 3:57:55 PM</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Catherine</td>
-                <td>catherine.cnplus@gmail.com</td>
-                <td>Corparable</td>
-                <td>finance</td>
-                <td>0829289852</td>
-                <td>Micro Banking System</td>
-                <td>Deskripsi singkat</td>
-                <td>5/16/2025, 3:08:54 PM</td>
-              </tr>
-            </tbody> -->
-            <tbody>
-              <tr>
-                <td colspan="9" id="loading">Memuat data...</td>
-              </tr>
-            </tbody>
-          </table>
+  <div id="backdrop" class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-opacity duration-200 ease-out z-40 lg:hidden"></div>
+
+  <aside id="aside"
+    class="fixed left-0 top-16 bottom-0 z-40 bg-white border-r border-zinc-200 w-64 lg:translate-x-0 -translate-x-full transition-all duration-300 ease-in-out flex flex-col overflow-hidden">
+    <ul class="p-2 space-y-1 flex-grow">
+      <li>
+        <a class="aside-link flex items-center gap-3 px-3 h-10 rounded-xl hover:bg-zinc-100 text-[#028f46] bg-[#028f46]/10 font-medium">
+          <i class="bx bxs-chalkboard text-xl"></i>
+          <span class="aside-label">Pengajuan Demo</span>
+        </a>
+      </li>
+      <li>
+        <a class="aside-link flex items-center gap-3 px-3 h-10 rounded-xl hover:bg-zinc-100 text-zinc-800">
+          <i class="bx bxs-cog text-xl"></i>
+          <span class="aside-label">Pengaturan</span>
+        </a>
+      </li>
+    </ul>
+    <div class="p-3 border-t border-zinc-200">
+      <button id="btnCollapse" class="w-full h-10 flex items-center justify-between px-3 rounded-xl hover:bg-zinc-50 border border-zinc-200">
+        <span data-collapse-label class="text-sm">Collapse sidebar</span>
+        <i class="bx bx-chevrons-left text-2xl transition-transform duration-200 ease-linear"></i>
+      </button>
+    </div>
+  </aside>
+
+  <div id="page" class="pt-6 lg:pl-64 transition-all">
+    <div class="mx-auto max-w-7xl px-4 lg:px-8">
+      <main class="col-span-12">
+        <form id="filterBar" action="" method="get" class="w-full mb-4">
+          <div class="relative flex items-center gap-2 max-w-full">
+            <div class="relative flex-1 min-w-0">
+              <i class="bx bx-search absolute left-3 top-3 text-zinc-400"></i>
+              <input id="q" name="q" type="search" placeholder="Search..."
+                class="w-full h-10 pl-10 pr-3 rounded-xl border border-zinc-200 bg-white text-sm focus:ring-2 focus:ring-[#028f46] outline-none" />
+            </div>
+
+            <button id="btnDropdown" type="button"
+              class="h-10 px-3 rounded-xl border border-[#026934] text-sm bg-[#028f46] hover:bg-[#026934] text-white flex items-center gap-2 ease-in-out duration-150">
+              <i class="bx bx-filter-alt"></i><span id="btnLabel">Filter</span>
+            </button>
+
+            <div id="dropdown"
+              class="hidden absolute right-0 top-[calc(100%+6px)] z-50 w-full sm:w-[560px] md:w-[720px] lg:w-[880px] bg-white border border-zinc-200 rounded-xl shadow-lg">
+              <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-3 border-b md:border-b-0 md:border-r border-zinc-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="font-semibold text-sm">Industri</div>
+                    <button id="btnAllInd" type="button" class="text-xs px-2 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-50">Select all</button>
+                  </div>
+                  <div id="listInd" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-auto"></div>
+                </div>
+                <div class="p-3">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="font-semibold text-sm">Produk/Servis</div>
+                    <button id="btnAllProd" type="button" class="text-xs px-2 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-50">Select all</button>
+                  </div>
+                  <div id="listProd" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-auto"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+
+        <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
+          <div class="max-h-[100vh] overflow-y-auto overflow-x-auto">
+            <table id="data-table" class="w-full min-w-[1200px] text-sm text-left">
+              <thead class="bg-zinc-50 text-xs uppercase text-zinc-600 sticky top-0">
+                <tr>
+                  <th class="py-3 px-4 text-center overflow-hidden">No</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Nama Lengkap</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Email</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Perusahaan</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Industri</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Nomor Telepon</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Produk</th>
+                  <th class="py-3 px-4 text-center overflow-hidden">Deskripsi</th>
+                  <th class="py-3 px-4 text-center overflow-hidden whitespace-nowrap">Tanggal Pengajuan</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-200"></tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>
-    <!-- Main -->
+  </div>
+  <script src="../assets/admin.js"></script>
+</body>
 
-  </body>
 </html>
