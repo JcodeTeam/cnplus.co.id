@@ -286,4 +286,95 @@
         if (window.innerWidth >= 1024) closeMobileAside()
       })
     })()
+    // ---------- Notify Demo ----------
+     document.querySelectorAll('.toggle-btn').forEach(function(btn) {
+            btn.addEventListener('click', async function() {
+                const id = btn.getAttribute('data-id');
+                const current = btn.getAttribute('data-state') === '1' ? 1 : 0;
+                const next = current ? 0 : 1;
+
+                const formData = new FormData();
+                formData.append('id', id);
+                formData.append('notify_demo', next);
+
+                try {
+                    const res = await fetch('../api/update_notify.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await res.json();
+
+                    if (data && data.success) {
+                        btn.setAttribute('data-state', String(next));
+                        const span = btn.querySelector('span');
+                        const icon = btn.querySelector('i');
+
+                        if (next === 1) {
+                            btn.className = 'toggle-btn inline-flex items-center h-8 px-3 rounded-xl text-xs font-medium border transition-colors bg-[#028f46] border-[#028f46] text-white hover:bg-[#028f46]';
+                            span.textContent = 'Aktif';
+                            icon.className = 'bx bx-bell text-base mr-1.5';
+                        } else {
+                            btn.className = 'toggle-btn inline-flex items-center h-8 px-3 rounded-xl text-xs font-medium border transition-colors bg-rose-600 border-rose-700 text-white hover:bg-rose-700';
+                            span.textContent = 'Nonaktif';
+                            icon.className = 'bx bx-bell-off text-base mr-1.5';
+                        }
+                    } else {
+                        alert('Gagal memperbarui status');
+                    }
+                } catch (e) {
+                    alert('Terjadi kesalahan jaringan');
+                }
+            });
+        });
+        // ---------- Modal Register Admin ----------
+        const modal = document.getElementById('registerModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        let isAnimating = false;
+
+        openBtn.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            modal.classList.add('active');
+            setTimeout(() => isAnimating = false, 400);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        document.getElementById("register-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            const password = formData.get("password");
+            const confirm = formData.get("confirm_password");
+
+            if (password !== confirm) {
+                document.getElementById("error-message").textContent = "Password dan konfirmasi tidak cocok.";
+                return;
+            }
+
+            try {
+                const res = await fetch("../api/register.php", {
+                    method: "POST",
+                    body: formData
+                });
+                const data = await res.json();
+
+                if (data.status === "success") {
+                    alert("Admin berhasil ditambahkan!");
+                    window.location.reload();
+                } else {
+                    document.getElementById("error-message").textContent = data.message || "Gagal menambah admin.";
+                }
+            } catch (err) {
+                document.getElementById("error-message").textContent = "Terjadi kesalahan koneksi.";
+            }
+        });
   

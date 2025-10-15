@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute([$name, $username, $email, $hashedPassword]);
 
         ob_clean();
-        echo json_encode(['status' => 'success', 'redirect' => 'index.html']);
+        echo json_encode(['status' => 'success', 'redirect' => 'settings.php']);
     } catch (PDOException $e) {
         error_log("Register error: " . $e->getMessage());
         ob_clean();
