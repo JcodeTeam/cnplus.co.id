@@ -20,6 +20,8 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="icon" href="../asset/logo-2.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/mregister-admin.css" />
+    <script src="../assets/admin.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -77,7 +79,7 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
                     <div class="p-4 border-b border-zinc-200 flex items-center justify-between">
                         <div class="text-lg font-semibold">Pengaturan Admin</div>
-                        <div class="text-xs text-zinc-500">Notifikasi pengajuan demo per admin</div>
+                        <button id="openModalBtn">Tambah Admin</button>
                     </div>
 
                     <div class="max-h-[100vh] overflow-y-auto overflow-x-auto">
@@ -114,51 +116,7 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </main>
         </div>
+        <?php include '../admin/register.php'; ?>
     </div>
-
-    <script>
-        document.querySelectorAll('.toggle-btn').forEach(function(btn) {
-            btn.addEventListener('click', async function() {
-                const id = btn.getAttribute('data-id');
-                const current = btn.getAttribute('data-state') === '1' ? 1 : 0;
-                const next = current ? 0 : 1;
-
-                const formData = new FormData();
-                formData.append('id', id);
-                formData.append('notify_demo', next);
-
-                try {
-                    const res = await fetch('../api/update_notify.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const data = await res.json();
-
-                    if (data && data.success) {
-                        btn.setAttribute('data-state', String(next));
-                        const span = btn.querySelector('span');
-                        const icon = btn.querySelector('i');
-
-                        if (next === 1) {
-                            btn.className = 'toggle-btn inline-flex items-center h-8 px-3 rounded-xl text-xs font-medium border transition-colors bg-[#028f46] border-[#028f46] text-white hover:bg-[#028f46]';
-                            span.textContent = 'Aktif';
-                            icon.className = 'bx bx-bell text-base mr-1.5';
-                        } else {
-                            btn.className = 'toggle-btn inline-flex items-center h-8 px-3 rounded-xl text-xs font-medium border transition-colors bg-rose-600 border-rose-700 text-white hover:bg-rose-700';
-                            span.textContent = 'Nonaktif';
-                            icon.className = 'bx bx-bell-off text-base mr-1.5';
-                        }
-                    } else {
-                        alert('Gagal memperbarui status');
-                    }
-                } catch (e) {
-                    alert('Terjadi kesalahan jaringan');
-                }
-            });
-        });
-    </script>
-
-    <script src="../assets/admin.js"></script>
 </body>
-
 </html>
