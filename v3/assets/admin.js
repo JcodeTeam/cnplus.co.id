@@ -470,58 +470,75 @@ document.querySelectorAll(".toggle-btn").forEach(function (btn) {
   });
 });
 // ---------- Modal Register Admin ----------
-const modal = document.getElementById("registerModal");
-const openBtn = document.getElementById("openModalBtn");
-const closeBtn = document.getElementById("closeModalBtn");
-let isAnimating = false;
+(function () {
+  const trigger = document.getElementById("registerDialog");
+  const modal = document.getElementById("registerModal");
+  const backdrop = document.getElementById("registerModalBackdrop");
+  const panel = document.getElementById("registerModalPanel");
+  const closeBtn = document.getElementById("closeModalBtn");
 
-openBtn.addEventListener("click", () => {
-  if (isAnimating) return;
-  isAnimating = true;
-  modal.classList.add("active");
-  setTimeout(() => (isAnimating = false), 400);
-});
+  if (!trigger || !modal || !backdrop || !panel || !closeBtn) return;
 
-closeBtn.addEventListener("click", () => {
-  modal.classList.remove("active");
-});
+  let lock = false;
 
-window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.classList.remove("active");
-});
+  const openModal = () => {
+    if (!modal.classList.contains("hidden") || lock) return;
+    lock = true;
 
-document
-  .getElementById("register-form")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
+    backdrop.classList.add("opacity-0");
+    panel.classList.add("opacity-0", "scale-95", "translate-y-4");
 
-    const formData = new FormData(this);
+    modal.classList.remove("hidden");
+    panel.getBoundingClientRect();
 
-    const password = formData.get("password");
-    const confirm = formData.get("confirm_password");
+    requestAnimationFrame(() => {
+      backdrop.classList.remove("opacity-0");
+      panel.classList.remove("opacity-0", "scale-95", "translate-y-4");
+    });
 
-    if (password !== confirm) {
-      document.getElementById("error-message").textContent =
-        "Password dan konfirmasi tidak cocok.";
-      return;
+    document.body.style.overflow = "hidden";
+    setTimeout(() => (lock = false), 350);
+  };
+
+  const closeModal = () => {
+    if (lock) return;
+    lock = true;
+
+    backdrop.classList.add("opacity-0");
+    panel.classList.add("opacity-0", "scale-95", "translate-y-4");
+
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+      lock = false;
+    }, 300);
+  };
+
+  trigger.addEventListener("click", openModal);
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal(); });
+
+  document.querySelectorAll("button[data-eye]").forEach((btn) => {
+    if (!btn.querySelector("i")) {
+      const i = document.createElement("i");
+      i.className = "bx bx-show text-xl";
+      btn.appendChild(i);
     }
 
-    try {
-      const res = await fetch("../api/register.php", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-eye");
+      const input = document.getElementById(targetId);
+      const icon = btn.querySelector("i");
+      if (!input || !icon) return;
 
-      if (data.status === "success") {
-        alert("Admin berhasil ditambahkan!");
-        window.location.reload();
-      } else {
-        document.getElementById("error-message").textContent =
-          data.message || "Gagal menambah admin.";
-      }
-    } catch (err) {
-      document.getElementById("error-message").textContent =
-        "Terjadi kesalahan koneksi.";
-    }
+      input.type = input.type === "password" ? "text" : "password";
+      icon.classList.toggle("bx-show", input.type === "password");
+      icon.classList.toggle("bx-hide", input.type !== "password");
+
+      btn.classList.add("scale-95");
+      setTimeout(() => btn.classList.remove("scale-95"), 120);
+      input.focus();
+    });
   });
+})();

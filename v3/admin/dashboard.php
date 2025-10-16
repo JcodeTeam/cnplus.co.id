@@ -36,7 +36,8 @@ if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
           <i class="bx bx-user-circle text-2xl mt-1"></i>
           <span class="text-sm font-medium truncate max-w-[12rem]"><?php echo $_SESSION['admin_username']; ?></span>
         </div>
-        <a href="../api/logout.php" class="flex items-center gap-2 h-9 border border-zinc-200 px-3 rounded-lg text-sm hover:bg-zinc-50">
+        <a href="../api/logout.php"
+          class="flex items-center gap-2 h-9 border border-zinc-200 px-3 rounded-lg text-sm hover:bg-zinc-50">
           <i class="bx bx-log-out text-lg"></i>
           <span class="hidden sm:inline">Logout</span>
         </a>
@@ -134,6 +135,7 @@ if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
     </div>
   </div>
   <script src="../assets/admin.js"></script>
+  <script src="../assets/logout-confirm.js"></script>
 </body>
 
 </html>

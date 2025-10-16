@@ -23,6 +23,7 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../assets/mregister-admin.css" />
     <script src="../assets/admin.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 </head>
 
 <body class="bg-zinc-50 text-zinc-900" id="app">
@@ -40,7 +41,8 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <i class="bx bx-user-circle text-2xl mt-1"></i>
                     <span class="text-sm font-medium truncate max-w-[12rem]"><?php echo htmlspecialchars($_SESSION['admin_username']); ?></span>
                 </div>
-                <a href="../api/logout.php" class="flex items-center gap-2 h-9 border border-zinc-200 px-3 rounded-lg text-sm hover:bg-zinc-50">
+                <a href="../api/logout.php"
+                    class="flex items-center gap-2 h-9 border border-zinc-200 px-3 rounded-lg text-sm hover:bg-zinc-50">
                     <i class="bx bx-log-out text-lg"></i>
                     <span class="hidden sm:inline">Logout</span>
                 </a>
@@ -79,7 +81,10 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
                     <div class="p-4 border-b border-zinc-200 flex items-center justify-between">
                         <div class="text-lg font-semibold">Pengaturan Admin</div>
-                        <button id="openModalBtn">Tambah Admin</button>
+                        <button id="registerDialog" class="bg-[#028f46] hover:bg-[#015c2d] text-white text-sm p-1.5 px-3 rounded-xl inline-flex items-center gap-1 transition-all duration-300 ease-out">
+                            <i class="bx bx-plus text-lg mt-0.5"></i>
+                            <span>Tambah Admin</span>
+                        </button>
                     </div>
 
                     <div class="max-h-[100vh] overflow-y-auto overflow-x-auto">
@@ -101,7 +106,7 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <td class="py-3 px-4">
                                             <button
                                                 class="toggle-btn inline-flex items-center h-8 px-3 rounded-xl text-xs font-medium border transition-colors
-                        <?php echo $admin['notify_demo'] ? 'bg-[#028f46] border-[#028f46] text-white hover:bg-[#028f46]' : 'bg-rose-600 border-rose-700 text-white hover:bg-rose-700'; ?>"
+                        <?php echo $admin['notify_demo'] ? 'bg-[#028f46] border-[#028f46] text-white hover:bg-[#015c2d]' : 'bg-rose-600 border-rose-700 text-white hover:bg-rose-700'; ?>"
                                                 data-id="<?php echo (int)$admin['id']; ?>"
                                                 data-state="<?php echo $admin['notify_demo'] ? '1' : '0'; ?>">
                                                 <i class="bx <?php echo $admin['notify_demo'] ? 'bx-bell' : 'bx-bell-off'; ?> text-base mr-1.5"></i>
@@ -118,5 +123,7 @@ $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <?php include '../admin/register.php'; ?>
     </div>
+    <script src="../assets/logout-confirm.js"></script>
 </body>
+
 </html>
