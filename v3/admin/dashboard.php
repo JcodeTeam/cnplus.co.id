@@ -92,14 +92,14 @@ if (empty($_SESSION['admin_logged_in']) || empty($_SESSION['admin_id'])) {
                 <div class="p-3 border-b md:border-b-0 md:border-r border-zinc-200">
                   <div class="flex items-center justify-between mb-2">
                     <div class="font-semibold text-sm">Industri</div>
-                    <button id="btnAllInd" type="button" class="text-xs px-2 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-50">Select all</button>
+                    <button id="btnAllInd" type="button" class="text-xs px-2 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-50">View all</button>
                   </div>
                   <div id="listInd" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-auto"></div>
                 </div>
                 <div class="p-3">
                   <div class="flex items-center justify-between mb-2">
                     <div class="font-semibold text-sm">Produk/Servis</div>
-                    <button id="btnAllProd" type="button" class="text-xs px-2 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-50">Select all</button>
+                    <button id="btnAllProd" type="button" class="text-xs px-2 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-50">View all</button>
                   </div>
                   <div id="listProd" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-auto"></div>
                 </div>
